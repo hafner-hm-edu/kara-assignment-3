@@ -1,0 +1,6 @@
+Labyrinth
+Schreiben Sie ein Programm, das Kara durch ein Labyrinth in einem Wald führt, bis es das einzige Kleeblatt gefunden und aufgelesen hat. Der Weg durch den Wald beginnt in der 1. Spalte links am Rand und endet rechts am Rand in der letzten Spalte. Der Start und das Ende können sich dabei in einer beliebigen Zeile befinden, lediglich die erste und letzte Zeile sind nicht möglich.
+Assignment08-Gegenüber-Unten.world
+Assignment08-Gegenüber-Oben.world
+Assignment08-Geradeaus.world
+Assignment08-Kompliziert.world

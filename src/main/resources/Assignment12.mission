@@ -1,0 +1,6 @@
+Hindernisse zählen
+Kara möchte die gesamte Welt erkunden, doch dies ist diesmal gar nicht so einfach: In Karas Welt sind viele Hindernisse gesetzt worden. Entwickeln Sie ein Programm, das Kara durch die gesamte (beliebig große) Welt wandern lässt, und die gesamte Anzahl die Hindernisse (d.h. Bäume und Pilze) auf dem Weg zählt. Höhe und Breite der Welt sind mindestens 3 Felder.
+Assignment12-Minimum.world
+Assignment12-Baum-voraus.world
+Assignment12-Ecken.world
+Assignment12-Slalom.world
