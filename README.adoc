@@ -10,7 +10,7 @@ Prof. Dr. Ullrich Hafner <ullrich.hafner@hm.edu>
 :xrefstyle: short
 :sectnums:
 :partnums:
-ifndef::includedir[:imagesdir: ./]
+ifndef::includedir[:includedir: ./]
 ifndef::imagesdir[:imagesdir: ./]
 ifndef::plantUMLDir[:plantUMLDir: .plantuml/]
 ifdef::env-github,env-browser[:relfilesuffix: .adoc]
