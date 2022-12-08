@@ -3,45 +3,93 @@ package edu.hm.hafner.kara;
 import static de.i8k.karalight.Kara.*;
 
 /**
- * KaraLight: Template für die Übungsaufgaben.
+ * KaraLight: solution of assignment 12.
  *
  * @author Ullrich Hafner
  */
 public class Assignment12 {
     /**
-     * Die {@code main} Methode ist der Ausgangspunkt für KaraLight. Hier wird direkt in Java programmiert, folgende
-     * Kara-Befehle können verwendet werden, um Kara zu steuern:
-     * <ul>
-     *   <li>{@code move()} - Kara bewegt sich einen Schritt nach vorn. Das geht nur, wenn vor Kara kein Baum ist!
-     *   Wenn vor Kara ein Pilz ist, schiebt Kara den Pilz eine Position weiter.
-     *   (Das setzt wiederum voraus, dass der Platz vor dem Pilz frei ist). </li>
-     *   <li>{@code turnRight()} bzw. {@code turnLeft()} - Kara dreht sich nach rechts bzw. links</li>
-     *   <li>{@code pickLeaf()} - Kara nimmt ein Blatt auf (geht nur, wenn eins da ist!)</li>
-     *   <li>{@code putLeaf()} - Kara legt ein Blatt ab (geht nur, wenn keins da ist!)</li>
-     *   <li>{@code say(...)} - Kara gibt einen Text in einem Fenster aus.</li>
-     *   <li>{@code askNumber(...)} - Kara fragt nach einer Zahl, die den Ablauf des Programms variabel gestaltet.</li>
-     * </ul>
-     * Zusätzlich stehen Ihnen die folgenden Abfragen zur Verfügung:
-     * <ul>
-     *   <li>{@code isMushroomInFront()} - liefert {@code true}, wenn vor Kara ein Pilz steht</li>
-     *   <li>{@code isTreeInFront()} - liefert {@code true}, wenn vor Kara ein Baum steht</li>
-     *   <li>{@code isTreeLeft()} - liefert {@code true}, wenn links von Kara ein Baum steht</li>
-     *   <li>{@code isTreeRight()} - liefert {@code true}, wenn rechts von Kara ein Baum steht</li>
-     *   <li>{@code isOnLeaf()} - liefert {@code true}, wenn Kara auf einem Blatt steht</li>
-     * </ul>
+     * Entrypoint for Kara: this method is called once if you press the 'Ausführen' button in KaraLight.
      *
      * @param unused
-     *         Dieser Parameter wird von Kara nicht benutzt, muss aber bestehen bleiben, damit die KaraLight
-     *         Oberfläche in der Entwicklungsumgebung gestartet werden kann. Dieser Parameter ist auch erforderlich,
-     *         damit die automatisierte Auswertung der Ergebnisse funktioniert.
+     *         this parameter is not used by KaraLight
      */
     public static void main(final String... unused) {
-        // Beispielcode, kann entfernt werden
-        if (isOnLeaf()) {
-            pickLeaf();
+        int obstacleCounter = 0;
+
+        boolean isInSecondColumn = false;
+        while (!isOnLeaf()) {
+            obstacleCounter += countObstaclesInCurrentRow();
+
+            turnRight();
+            if (isInSecondColumn) {
+                moveToFirstColumn();
+                isInSecondColumn = false;
+            }
+            else if (isObstacleInFront()) {
+                moveToSecondColumn();
+                isInSecondColumn = true;
+            }
+            else {
+                down();
+                isInSecondColumn = false;
+            }
         }
-        else {
+
+        say(String.format("Number of obstacles: %d", obstacleCounter));
+    }
+
+    private static int countObstaclesInCurrentRow() {
+        int obstactleCounter = 0;
+        while (!isOnLeaf()) {
             putLeaf();
+            if (isObstacleInFront()) {
+                obstactleCounter++;
+                walkAroundObstacle();
+            }
+            else {
+                move();
+            }
         }
+        return obstactleCounter;
+    }
+
+    private static boolean isObstacleInFront() {
+        return isTreeInFront() || isMushroomInFront();
+    }
+
+    private static void moveToFirstColumn() {
+        down();
+        turnAround();
+        move();
+        turnAround();
+    }
+
+    private static void moveToSecondColumn() {
+        turnLeft();
+        move();
+        turnRight();
+        down();
+    }
+
+    private static void turnAround() {
+        turnRight();
+        turnRight();
+    }
+
+    static void down() {
+        move();
+        turnLeft();
+    }
+
+    static void walkAroundObstacle() {
+        turnRight();
+        move();
+        turnLeft();
+        move();
+        move();
+        turnLeft();
+        move();
+        turnRight();
     }
 }
